@@ -7,7 +7,7 @@ type Props = {
     additionalClassName?: string
 }
 
-const activeLink: React.FC<Props> = ({
+const Link: React.FC<Props> = ({
     children,
     href,
     activeClassName,
@@ -28,4 +28,4 @@ const activeLink: React.FC<Props> = ({
     )
 }
 
-export default activeLink
+export default Link

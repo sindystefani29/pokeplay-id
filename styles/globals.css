@@ -18,4 +18,16 @@ a {
 
 :root {
   --primaryColor: orange;
+  --secondaryColor: #FFCB05;
+}
+
+#nprogress .bar {
+  background: var(--secondaryColor) !important;
+  height: 3px !important;
+  z-index: 1140 !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--secondaryColor);
+  border-left-color: var(--secondaryColor);
 }
