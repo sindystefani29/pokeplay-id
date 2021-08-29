@@ -28,6 +28,10 @@ const useStyles = makeStyles({
     bottomNav: {
         width: '100%'
     },
+    bottomNavButton: {
+        padding: '0',
+        paddingTop: '0'
+    },
     logo: {
         maxWidth: '35%',
         margin: 'auto'
@@ -63,10 +67,10 @@ const Layout: React.FC<LayoutProps> = ({
                 <Toolbar>
                     <BottomNavigation className={classes?.bottomNav}>
                         <Link href="/" activeClassName={styles?.active} additionalClassName={styles?.linkLayout}>
-                            <BottomNavigationAction label="Poke List" icon={<ListIcon />} />
+                            <BottomNavigationAction label="Poke List" icon={<ListIcon />} className={classes?.bottomNavButton} />
                         </Link>
                         <Link href="/favorites" activeClassName={styles?.active} additionalClassName={styles?.linkLayout}>
-                            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+                            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} className={classes?.bottomNavButton} />
                         </Link>
                     </BottomNavigation>
                 </Toolbar>

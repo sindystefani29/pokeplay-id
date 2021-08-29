@@ -31,3 +31,7 @@ a {
   border-top-color: var(--secondaryColor);
   border-left-color: var(--secondaryColor);
 }
+
+.MuiBottomNavigationAction-iconOnly{
+  padding-top: 0 !important;
+}
