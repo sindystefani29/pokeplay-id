@@ -1,0 +1,12 @@
+.linkLayout{
+    width: 50%;
+    display: flex;
+}
+
+.linkLayout span{
+    opacity: 1 !important;
+}
+
+.active svg, .active span{
+    color: orange;
+}

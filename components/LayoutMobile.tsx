@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -7,9 +6,10 @@ import Slide from '@material-ui/core/Slide';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import ListIcon from '@material-ui/icons/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { makeStyles } from '@material-ui/core/styles';
+import Link from './Link';
+import styles from '../styles/Layout.module.css'
 
 interface LayoutProps {
     children: any
@@ -61,9 +61,13 @@ const Layout: React.FC<LayoutProps> = ({
             {children}
             <AppBar className={classes?.appbarBottom}>
                 <Toolbar>
-                    <BottomNavigation className={classes?.bottomNav} showLabels>
-                        <BottomNavigationAction label="Poke List" icon={<ListIcon />} />
-                        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+                    <BottomNavigation className={classes?.bottomNav}>
+                        <Link href="/" activeClassName={styles?.active} additionalClassName={styles?.linkLayout}>
+                            <BottomNavigationAction label="Poke List" icon={<ListIcon />} />
+                        </Link>
+                        <Link href="/favorites" activeClassName={styles?.active} additionalClassName={styles?.linkLayout}>
+                            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+                        </Link>
                     </BottomNavigation>
                 </Toolbar>
             </AppBar>
