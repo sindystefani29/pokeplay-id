@@ -29,8 +29,7 @@ const useStyles = makeStyles({
         width: '100%'
     },
     bottomNavButton: {
-        padding: '0',
-        paddingTop: '0'
+        padding: '0'
     },
     logo: {
         maxWidth: '35%',

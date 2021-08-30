@@ -7,6 +7,10 @@ body {
     Helvetica Neue, sans-serif;
 }
 
+body{
+  padding-top: 40px;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -18,7 +22,7 @@ a {
 
 :root {
   --primaryColor: orange;
-  --secondaryColor: #FFCB05;
+  --secondaryColor: #ffcb05;
 }
 
 #nprogress .bar {
@@ -32,6 +36,65 @@ a {
   border-left-color: var(--secondaryColor);
 }
 
-.MuiBottomNavigationAction-iconOnly{
+.MuiBottomNavigationAction-iconOnly {
   padding-top: 0 !important;
+}
+
+.rock {
+  background-color: rgb(148, 81, 81);
+}
+.ghost {
+  background-color: rgb(247, 247, 247);
+}
+.electric {
+  background-color: rgb(255, 255, 161);
+}
+.bug {
+  background-color: #f6d6a7;
+}
+.poison {
+  background-color: #e0a7f6;
+}
+.normal {
+  background-color: #f4f4f4;
+}
+.fairy {
+  background-color: rgba(255, 192, 203, 0.863);
+}
+.fire {
+  background-color: #fbe3df;
+}
+.grass {
+  background-color: #e2f9e1;
+}
+.water {
+  background-color: #e0f1fd;
+}
+
+.d-flex{
+  display: flex;
+}
+
+.align-center{
+  align-items: center;
+}
+
+.direction-column{
+  flex-direction: column;
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+.justify-between{
+  justify-content: space-between;
+}
+
+.justify-center{
+  justify-content: center;
+}
+
+.w-50{
+  width: 50%
 }

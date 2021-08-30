@@ -1,13 +1,15 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import Container from '@material-ui/core/Container'
+import ScreenLoader from '../components/ScreenLoader'
 
 const Layout = dynamic(() => import('../components/LayoutMobile'),
-    { loading: () => <p>...</p> })
+    { loading: () => <ScreenLoader /> })
 
 const Home: NextPage = () => {
     return (
-        <div>
+        <Container>
             <Head>
                 <title>Favorite List</title>
                 <meta name="description" content="Pokeplay react app" />
@@ -16,7 +18,7 @@ const Home: NextPage = () => {
             <Layout>
                 <h2>Some text here</h2>
             </Layout>
-        </div>
+        </Container>
     )
 }
 
