@@ -22,7 +22,7 @@ a {
 
 :root {
   --primaryColor: orange;
-  --secondaryColor: #ffcb05;
+  --secondaryColor: #03AC0E;
 }
 
 #nprogress .bar {
@@ -38,6 +38,13 @@ a {
 
 .MuiBottomNavigationAction-iconOnly {
   padding-top: 0 !important;
+}
+
+.MuiDrawer-paperAnchorBottom{
+  min-height: 40%;
+  overflow-y: unset !important;
+  align-items: center;
+  padding: 20px;
 }
 
 .rock {
