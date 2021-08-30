@@ -22,11 +22,11 @@ const Home: NextPage = () => {
       <Layout>
         <h2>Some text here {favorites?.name}</h2>
         <div className="d-flex flex-wrap justify-between">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {new Array(100)?.fill('')?.map((item, index) => {
+            return(
+              <Card key={index} />
+            )
+          })}
         </div>
       </Layout>
     </Container>

@@ -8,7 +8,7 @@ body {
 }
 
 body{
-  padding-top: 40px;
+  padding: 40px 0 70px 0;
 }
 
 a {
@@ -97,4 +97,28 @@ a {
 
 .w-50{
   width: 50%
+}
+
+.fade-img{
+  animation: onFaded 0.8s;
+  -webkit-animation: onFaded 0.8s;
+  -moz-animation: onFaded 0.8s;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes onFaded {
+  0%   {opacity: 0}
+  100% {opacity: 1}
+}
+
+/* Safari 4.0 - 8.0 */
+@-moz-keyframes onFaded {
+  0%   {opacity: 0}
+  100% {opacity: 1}
+}
+
+/* Standard syntax */
+@keyframes onFaded {
+  0%   {opacity: 0}
+  100% {opacity: 1}
 }
