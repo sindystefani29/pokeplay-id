@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         <div className="d-flex flex-wrap justify-between">
           {new Array(100)?.fill('')?.map((item, index) => {
             return(
-              <Card key={index} />
+              <Card key={index} index={index} />
             )
           })}
         </div>
