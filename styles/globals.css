@@ -6,8 +6,8 @@ body {
     Helvetica Neue, sans-serif;
 }
 
-body{
-  padding: 40px 0 70px 0;
+body {
+  padding: 70px 0;
 }
 
 a {
@@ -15,7 +15,7 @@ a {
   text-decoration: none;
 }
 
-p{
+p {
   margin: 5px 0;
 }
 
@@ -25,9 +25,9 @@ p{
 
 :root {
   --primaryColor: orange;
-  --secondaryColor: #03AC0E;
+  --secondaryColor: #03ac0e;
   --grey: #eee;
-  --greyText: #919191
+  --greyText: #919191;
 }
 
 #nprogress .bar {
@@ -45,14 +45,14 @@ p{
   padding-top: 0 !important;
 }
 
-.MuiDrawer-paperAnchorBottom{
+.MuiDrawer-paperAnchorBottom {
   min-height: 270px;
   overflow-y: unset !important;
   align-items: center;
   padding: 20px;
 }
 
-.MuiDialog-paperWidthSm{
+.MuiDialog-paperWidthSm {
   min-height: 20%;
 }
 
@@ -87,43 +87,48 @@ p{
   background-color: #e0f1fd;
 }
 
-.d-flex{
+.d-flex {
   display: flex;
 }
 
-.align-center{
+.align-center {
   align-items: center;
 }
 
-.direction-column{
+.direction-column {
   flex-direction: column;
 }
 
-.flex-wrap{
+.flex-wrap {
   flex-wrap: wrap;
 }
 
-.justify-between{
+.justify-between {
   justify-content: space-between;
 }
 
-.justify-center{
+.justify-center {
   justify-content: center;
 }
 
-.w-50{
-  width: 50%
+.container-loader {
+  height: 50vh;
+  width: 100%;
 }
 
-.m-auto{
+.w-50 {
+  width: 50%;
+}
+
+.m-auto {
   margin: auto;
 }
 
-.text-center{
+.text-center {
   text-align: center;
 }
 
-.fade-img{
+.fade-img {
   animation: onFaded 0.8s;
   -webkit-animation: onFaded 0.8s;
   -moz-animation: onFaded 0.8s;
@@ -131,20 +136,32 @@ p{
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes onFaded {
-  0%   {opacity: 0}
-  100% {opacity: 1}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Safari 4.0 - 8.0 */
 @-moz-keyframes onFaded {
-  0%   {opacity: 0}
-  100% {opacity: 1}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Standard syntax */
 @keyframes onFaded {
-  0%   {opacity: 0}
-  100% {opacity: 1}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .line {

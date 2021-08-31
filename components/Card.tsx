@@ -64,7 +64,7 @@ const CardComponent: React.FC<CardProps> = ({ index, data, fadeEffect }) => {
                     <img src={data?.dreamworld} alt={data?.name} className={toggleDrawerOpened ? styles?.imgMove : styles?.imgHidden} />
                     <div className={styles?.shadow}></div>
                 </div>
-                <h3 className={styles?.drawerText}>ivysaur</h3>
+                <h3 className={styles?.drawerText}>{data?.name}</h3>
                 <div className={styles?.drawerButton}>
                     <Button onClick={() => setToggleDrawerOpened(false)} size="small" variant="outlined" className={`${classes.button} ${classes.buttonOutline}`}>
                         Batal
