@@ -63,7 +63,7 @@ const CardComponent: React.FC<CardProps> = ({ index }) => {
                         Batal
                     </Button>
                     <Link href={`/detail/${1}`}>
-                        <Button size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`}>
+                        <Button size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`} onClick={() => setToggleDrawerOpened(false)}>
                             Lihat Selengkapnya
                         </Button>
                     </Link>

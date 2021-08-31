@@ -66,7 +66,7 @@ const Home: NextPage<Props> = ({ idParam }) => {
                 <meta name="description" content="Pokeplay react app" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Layout>
+            <Layout titleDetailPage='Ivory'>
                 <Img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png" alt="trial" />
                 <Card />
                 <Button variant="contained" className={`${classes.button} ${classes.buttonContained}`} onClick={() => catchPokemon()}>Catch the Pokemon</Button>
