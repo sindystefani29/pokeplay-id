@@ -37,6 +37,7 @@ const useStyles = makeStyles({
     button: {
         fontSize: 12,
         fontWeight: 800,
+        height: 35,
         textTransform: 'capitalize'
     },
     imgCardSize: {

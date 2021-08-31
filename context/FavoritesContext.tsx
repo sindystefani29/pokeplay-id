@@ -1,3 +1,4 @@
+//https://dev.to/hellomuthu23/how-to-use-usereducer-and-usecontext-hooks-with-typescript-in-react-14d1
 import React, { useReducer } from 'react'
 
 export interface FavoriteProps {

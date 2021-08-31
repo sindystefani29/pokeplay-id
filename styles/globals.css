@@ -46,7 +46,7 @@ p{
 }
 
 .MuiDrawer-paperAnchorBottom{
-  min-height: 40%;
+  min-height: 270px;
   overflow-y: unset !important;
   align-items: center;
   padding: 20px;
