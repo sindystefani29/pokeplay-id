@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
 import { useState } from 'react';
 import styles from '../styles/Card.module.css'
+import Link from './Link';
 
 interface CardProps {
     index: number
@@ -61,9 +62,11 @@ const CardComponent: React.FC<CardProps> = ({ index }) => {
                     <Button onClick={() => setToggleDrawerOpened(false)} size="small" variant="outlined" className={`${classes.button} ${classes.buttonOutline}`}>
                         Batal
                     </Button>
-                    <Button size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`}>
-                        Lihat Selengkapnya
-                    </Button>
+                    <Link href={`/detail/${1}`}>
+                        <Button size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`}>
+                            Lihat Selengkapnya
+                        </Button>
+                    </Link>
                 </div>
             </Drawer>
         </React.Fragment>
