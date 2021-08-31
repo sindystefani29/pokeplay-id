@@ -8,9 +8,11 @@ import Drawer from '@material-ui/core/Drawer';
 import { useState } from 'react';
 import styles from '../styles/Card.module.css'
 import Link from './Link';
+import { FavoriteProps } from '../context/FavoritesContext';
 
 interface CardProps {
-    index: number
+    index: number,
+    data: FavoriteProps
 }
 
 const useStyles = makeStyles({
@@ -35,18 +37,21 @@ const useStyles = makeStyles({
         fontSize: 12,
         fontWeight: 800,
         textTransform: 'capitalize'
+    },
+    imgCardSize: {
+        height: 100
     }
 });
 
-const CardComponent: React.FC<CardProps> = ({ index }) => {
+const CardComponent: React.FC<CardProps> = ({ index, data }) => {
     const classes = useStyles()
     const [toggleDrawerOpened, setToggleDrawerOpened] = useState<boolean>(false)
     return (
         <React.Fragment>
             <Card className={classes.root}>
                 <CardContent className={`d-flex direction-column align-center ${index % 4 === 1 ? 'grass' : index % 3 === 1 ? 'fire' : index % 5 === 1 ? 'water' : index % 6 === 2 ? 'bug' : index % 2 === 0 ? 'poison' : 'electric'}`}>
-                    <Img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg' alt='trial' />
-                    <h3>ivysaur</h3>
+                    <Img src={data?.dreamworld ?? ''} alt={data?.name ?? ''} className={classes?.imgCardSize} />
+                    <h3>{data?.name}</h3>
                     <Button onClick={() => setToggleDrawerOpened(true)} size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`}>
                         Preview
                     </Button>
@@ -54,7 +59,7 @@ const CardComponent: React.FC<CardProps> = ({ index }) => {
             </Card>
             <Drawer anchor='bottom' open={toggleDrawerOpened} onClose={() => setToggleDrawerOpened(false)}>
                 <div className={styles?.drawerImg}>
-                    <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/2.svg' alt='trial' className={toggleDrawerOpened ? styles?.imgMove : ''} />
+                    <img src={data?.dreamworld} alt={data?.name} className={toggleDrawerOpened ? styles?.imgMove : styles?.imgHidden} />
                     <div className={styles?.shadow}></div>
                 </div>
                 <h3 className={styles?.drawerText}>ivysaur</h3>
@@ -62,7 +67,7 @@ const CardComponent: React.FC<CardProps> = ({ index }) => {
                     <Button onClick={() => setToggleDrawerOpened(false)} size="small" variant="outlined" className={`${classes.button} ${classes.buttonOutline}`}>
                         Batal
                     </Button>
-                    <Link href={`/detail/${1}`}>
+                    <Link href={`/detail/${data?.id}`}>
                         <Button size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`} onClick={() => setToggleDrawerOpened(false)}>
                             Lihat Selengkapnya
                         </Button>

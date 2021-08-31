@@ -1,147 +1,119 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 
-interface FavoriteProps {
-    url?: string,
+export interface FavoriteProps {
+    id?: number,
     name?: string,
     image?: string,
+    artwork?: string,
+    dreamworld?: string
 }
 
 interface FavoriteProviderProps {
     children: any
 }
 
-export const FavoritesContext = React.createContext<FavoriteProps | null>(null)
+interface StateProps {
+    total?: number,
+    list?: FavoriteProps[]
+}
 
-export const FavoritesProvider: React.FC<FavoriteProviderProps> = ({ children }) => {
-    const favorites = [
+interface ActionProps {
+    type: string,
+    payload: number | FavoriteProps
+}
+
+const initState: StateProps = {
+    total: 0,
+    list: [
         {
-            "url": "https://pokeapi.co/api/v2/pokemon/2/",
             "name": "ivysaur",
             "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-            "__typename": "PokemonItem"
+            "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+            "dreamworld": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/2.svg"
         },
         {
-            "url": "https://pokeapi.co/api/v2/pokemon/3/",
             "name": "venusaur",
             "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-            "__typename": "PokemonItem"
+            "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+            "dreamworld": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/3.svg"
         },
         {
-            "url": "https://pokeapi.co/api/v2/pokemon/4/",
             "name": "charmander",
             "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-            "__typename": "PokemonItem"
+            "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+            "dreamworld": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg"
         },
         {
-            "url": "https://pokeapi.co/api/v2/pokemon/5/",
             "name": "charmeleon",
             "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
-            "__typename": "PokemonItem"
+            "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+            "dreamworld": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/5.svg"
         },
         {
-            "url": "https://pokeapi.co/api/v2/pokemon/6/",
             "name": "charizard",
             "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/7/",
-            "name": "squirtle",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/8/",
-            "name": "wartortle",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/9/",
-            "name": "blastoise",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/10/",
-            "name": "caterpie",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/11/",
-            "name": "metapod",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/11.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/12/",
-            "name": "butterfree",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/13/",
-            "name": "weedle",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/14/",
-            "name": "kakuna",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/15/",
-            "name": "beedrill",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/15.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/16/",
-            "name": "pidgey",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/17/",
-            "name": "pidgeotto",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/18/",
-            "name": "pidgeot",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/19/",
-            "name": "rattata",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/19.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/20/",
-            "name": "raticate",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png",
-            "__typename": "PokemonItem"
-        },
-        {
-            "url": "https://pokeapi.co/api/v2/pokemon/21/",
-            "name": "spearow",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/21.png",
-            "__typename": "PokemonItem"
+            "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+            "dreamworld": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/6.svg",
         }
     ]
+}
+
+export const ADD_FAVORITE: string = 'ADD_FAVORITE'
+export const REMOVE_FAVORITE: string = 'REMOVE_FAVORITE'
+
+export const FavoritesContext = React.createContext<{
+    state: StateProps;
+    dispatch: React.Dispatch<ActionProps>;
+}>({
+    state: initState,
+    dispatch: () => undefined,
+})
+
+export const FavoritesProvider: React.FC<FavoriteProviderProps> = ({ children }) => {
+    const favoriteReducer = (state: StateProps, action: ActionProps): StateProps => {
+        switch (action?.type) {
+            case ADD_FAVORITE:
+                if (typeof action.payload === 'object' && state?.list) {
+                    return {
+                        ...state,
+                        list: [...state?.list, action.payload]
+                    }
+                } else {
+                    return state
+                }
+            case REMOVE_FAVORITE:
+                if (typeof action.payload === 'number' && state?.list) {
+                    const arr = [...[], ...state?.list]
+                    arr.slice(action.payload, action.payload + 1)
+                    return {
+                        ...state,
+                        list: [...[], ...arr]
+                    }
+                } else {
+                    return state
+                }
+            default:
+                return state
+        }
+    }
+
+    const [state, dispatch] = useReducer(favoriteReducer, initState)
+
     return (
-        <FavoritesContext.Provider value={{
-            "url": "https://pokeapi.co/api/v2/pokemon/2/",
-            "name": "ivysaur",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-        }}>
+        <FavoritesContext.Provider value={{ state, dispatch }}>
             {children}
         </FavoritesContext.Provider>
     )
+}
+
+export const useFavorite = () => {
+    const context = React.useContext(FavoritesContext)
+    const {state, dispatch} = context
+    const addFavorite = (data: FavoriteProps) => dispatch({ type: ADD_FAVORITE, payload: data })
+    const removeFavorite = (index: number) => dispatch({ type: REMOVE_FAVORITE, payload: index })
+    return {
+        state,
+        addFavorite,
+        removeFavorite
+    }
 }

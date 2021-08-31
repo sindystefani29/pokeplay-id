@@ -27,6 +27,12 @@
     animation: move 1.5s infinite ease-in-out;
     -webkit-animation: move 1.5s infinite ease-in-out;
     -moz-animation: move 1.5s infinite ease-in-out;
+    width: 280px;
+    height: 280px;
+    margin: auto;
+}
+.imgHidden{
+    opacity: 0;
 }
 
 /* Safari 4.0 - 8.0 */
