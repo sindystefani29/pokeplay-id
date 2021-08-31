@@ -27,9 +27,15 @@ const Img: React.FC<Props> = ({
             }); // lazy loads elements with default selector as '.lozad'
             observer.observe();
             if (el) {
+                const dataSrc = el.getAttribute('data-src')
+                if (dataSrc !== el.src && dataSrc && el.src) {
+                    el.src = dataSrc
+                    el.onerror = () => {
+                        el.src = "/no-image.webp"
+                    }
+                }
                 el.onerror = () => {
-                    const dataSrc = el.getAttribute('data-src')
-                    if (dataSrc == src) {
+                    if (dataSrc === src) {
                         el.src = dataSrc
                         el.onerror = () => {
                             el.src = "/no-image.webp"

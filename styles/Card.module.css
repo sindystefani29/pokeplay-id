@@ -31,10 +31,32 @@
     height: 280px;
     margin: auto;
 }
-.imgHidden{
+.imgHidden {
     opacity: 0;
 }
+.fadeEffect {
+    animation: fadeDelete 1.5s;
+    -webkit-animation: fadeDelete 1.5s;
+    -moz-animation: fadeDelete 1.5s;
+}
 
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes fadeDelete {
+    0%   {opacity: 1}
+    100% {opacity: 0}
+  }
+  
+  /* Safari 4.0 - 8.0 */
+  @-moz-keyframes fadeDelete {
+    0%   {opacity: 1}
+    100% {opacity: 0}
+  }
+  
+  /* Standard syntax */
+  @keyframes fadeDelete {
+    0%   {opacity: 1}
+    100% {opacity: 0}
+  }
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes move {
     0% {

@@ -12,7 +12,8 @@ import { FavoriteProps } from '../context/FavoritesContext';
 
 interface CardProps {
     index: number,
-    data: FavoriteProps
+    data: FavoriteProps,
+    fadeEffect?: boolean
 }
 
 const useStyles = makeStyles({
@@ -43,12 +44,12 @@ const useStyles = makeStyles({
     }
 });
 
-const CardComponent: React.FC<CardProps> = ({ index, data }) => {
+const CardComponent: React.FC<CardProps> = ({ index, data, fadeEffect }) => {
     const classes = useStyles()
     const [toggleDrawerOpened, setToggleDrawerOpened] = useState<boolean>(false)
     return (
         <React.Fragment>
-            <Card className={classes.root}>
+            <Card className={`${classes.root} ${fadeEffect ? styles?.fadeEffect : ''}`}>
                 <CardContent className={`d-flex direction-column align-center ${index % 4 === 1 ? 'grass' : index % 3 === 1 ? 'fire' : index % 5 === 1 ? 'water' : index % 6 === 2 ? 'bug' : index % 2 === 0 ? 'poison' : 'electric'}`}>
                     <Img src={data?.dreamworld ?? ''} alt={data?.name ?? ''} className={classes?.imgCardSize} />
                     <h3>{data?.name}</h3>

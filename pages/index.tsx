@@ -6,12 +6,21 @@ import Card from '../components/Card'
 import Container from '@material-ui/core/Container'
 import ScreenLoader from '../components/ScreenLoader'
 import { useFavorite } from '../context/FavoritesContext'
+import { useState } from 'react'
 
 const Layout = dynamic(() => import('../components/LayoutMobile'),
   { loading: () => <ScreenLoader /> })
 
 const Home: NextPage = () => {
+  const [indexToRemove, setIndexToRemove] = useState<number | null>(null)
   const favorite = useFavorite()
+  const removeFavorite = (index: number) => {
+    setIndexToRemove(index)
+    setTimeout(() => {
+      setIndexToRemove(null)
+      favorite?.removeFavorite(index)
+    }, 1000);
+  }
   return (
     <Container>
       <Head>
@@ -29,7 +38,7 @@ const Home: NextPage = () => {
           })} */}
           {favorite?.state?.list?.map((item, index) => {
             return (
-              <Card key={index} index={index} data={item} />
+              <Card key={index} index={index} data={item} fadeEffect={indexToRemove === index} />
             )
           })}
           {/* <button onClick={() => {
@@ -39,7 +48,10 @@ const Home: NextPage = () => {
               "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
               "dreamworld": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/3.svg"
             })
-          }}>Add</button> */}
+          }}>Add</button>
+          <button onClick={() => {
+            removeFavorite(2)
+          }}>Remove</button> */}
         </div>
       </Layout>
     </Container>

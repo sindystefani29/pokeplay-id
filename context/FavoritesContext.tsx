@@ -13,7 +13,6 @@ interface FavoriteProviderProps {
 }
 
 interface StateProps {
-    total?: number,
     list?: FavoriteProps[]
 }
 
@@ -23,7 +22,6 @@ interface ActionProps {
 }
 
 const initState: StateProps = {
-    total: 0,
     list: [
         {
             "name": "ivysaur",
@@ -84,7 +82,7 @@ export const FavoritesProvider: React.FC<FavoriteProviderProps> = ({ children })
             case REMOVE_FAVORITE:
                 if (typeof action.payload === 'number' && state?.list) {
                     const arr = [...[], ...state?.list]
-                    arr.slice(action.payload, action.payload + 1)
+                    arr.splice(action.payload, 1)
                     return {
                         ...state,
                         list: [...[], ...arr]
