@@ -1,18 +1,17 @@
 import type { NextPage } from 'next'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Card from '../components/Card'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container'
 import ScreenLoader from '../components/ScreenLoader'
-import { FavoriteProps, useFavorite } from '../context/FavoritesContext'
-import { useState } from 'react'
+import { PokemonListProps } from '../context/FavoritesContext'
 import { useQuery } from '@apollo/client'
 import { LOAD_POKEMONS_LIST } from '../graphQL/Queries'
-import { useEffect } from 'react'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import LensIcon from '@material-ui/icons/Lens';
 
 const Layout = dynamic(() => import('../components/LayoutMobile'),
   { loading: () => <ScreenLoader /> })
@@ -29,18 +28,22 @@ const useStyles = makeStyles({
     height: 35,
     margin: '1em auto',
     textTransform: 'capitalize'
-  }
+  },
+  iconSm: {
+    width: 8,
+    height: 8,
+    margin: 'auto 5px',
+    fill: '#cdcccc'
+}
 });
 
 const Home: NextPage = () => {
   const classes = useStyles()
-  const [indexToRemove, setIndexToRemove] = useState<number | null>(null)
   const limit = 20
   const [offset, setOffset] = useState<number>(0)
   const [totalData, setTotalData] = useState<number>(0)
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true)
-  const [pokemonList, setPokemonList] = useState<FavoriteProps[]>([])
-  const favorite = useFavorite()
+  const [pokemonList, setPokemonList] = useState<PokemonListProps[]>([])
   const { error, loading, data } = useQuery(LOAD_POKEMONS_LIST, {
     variables: {
       limit,
@@ -48,13 +51,6 @@ const Home: NextPage = () => {
     },
   })
   const res = data?.pokemons
-  const removeFavorite = (index: number) => {
-    setIndexToRemove(index)
-    setTimeout(() => {
-      setIndexToRemove(null)
-      favorite?.removeFavorite(index)
-    }, 1000);
-  }
   useEffect(() => {
     //console.log(data)
     if (res?.results?.length > 0) {
@@ -65,9 +61,6 @@ const Home: NextPage = () => {
       })
     }
   }, [data])
-  // useEffect(() => {
-  //   console.log(loading)
-  // }, [loading])
   return (
     <Container>
       <Head>
@@ -76,6 +69,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
+        <p className="color-grey font-sm text-center d-flex justify-center align-center">
+          <LensIcon className={classes?.iconSm} />Total {totalData}<LensIcon className={classes?.iconSm} />
+        </p>
         <div className="d-flex flex-wrap justify-between">
           {loading && isFirstRender ?
             <div className="container-loader d-flex align-center">
@@ -86,9 +82,9 @@ const Home: NextPage = () => {
                 <p className="m-auto"><strong>Ooops... Something went wrong</strong></p>
               </div>
               :
-              pokemonList?.length > 0 ? pokemonList?.map((item: FavoriteProps, index: number) => {
+              pokemonList?.length > 0 ? pokemonList?.map((item: PokemonListProps, index: number) => {
                 return (
-                  <Card key={index} index={index} data={item} fadeEffect={indexToRemove === index} />
+                  <Card key={index} index={index} data={item} />
                 )
               }) : ('')
           }
@@ -101,22 +97,6 @@ const Home: NextPage = () => {
               </Button>
             : ('')
           }
-          {/* {favorite?.state?.list?.map((item, index) => {
-            return (
-              <Card key={index} index={index} data={item} fadeEffect={indexToRemove === index} />
-            )
-          })} */}
-          {/* <button onClick={() => {
-            favorite?.addFavorite({
-              "name": "venusaur",
-              "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-              "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
-              "dreamworld": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/3.svg"
-            })
-          }}>Add</button>
-          <button onClick={() => {
-            removeFavorite(2)
-          }}>Remove</button> */}
         </div>
       </Layout>
     </Container>

@@ -10,8 +10,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from './Link';
 import styles from '../styles/Layout.module.css'
+import { useFavorite } from '../context/FavoritesContext'
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Badge from '@material-ui/core/Badge';
 
 interface LayoutProps {
     children: any
@@ -66,6 +68,7 @@ const Layout: React.FC<LayoutProps> = ({
     titleDetailPage
 }) => {
     const classes = useStyles();
+    const favorite = useFavorite()
     const goBack = () => {
         let prevState = window.location.href
         window.history.go(-1)
@@ -102,7 +105,18 @@ const Layout: React.FC<LayoutProps> = ({
                             <BottomNavigationAction label="Poke List" icon={<ListIcon />} className={classes?.bottomNavButton} />
                         </Link>
                         <Link href="/favorites" activeClassName={styles?.active} additionalClassName={styles?.linkLayout}>
-                            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} className={classes?.bottomNavButton} />
+                            <BottomNavigationAction
+                                label="My Pokemon List"
+                                icon={
+                                    favorite?.state?.list && favorite?.state?.list?.length > 0 ?
+                                        <Badge badgeContent={favorite?.state?.list?.length} color="error">
+                                            <FavoriteIcon />
+                                        </Badge>
+                                        :
+                                        <FavoriteIcon />
+                                }
+                                className={classes?.bottomNavButton}
+                            />
                         </Link>
                     </BottomNavigation>
                 </Toolbar>
