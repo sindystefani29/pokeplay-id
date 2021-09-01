@@ -11,6 +11,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react'
 import { LOAD_POKEMON_DETAIL } from "../../../graphQL/Queries";
 import { client } from "../../../graphQL/ApolloClient";
+import { FavoriteProps, useFavorite } from '../../../context/FavoritesContext'
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import SendIcon from '@material-ui/icons/Send';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles({
     buttonContained: {
@@ -59,9 +64,32 @@ const Card = dynamic(() => import('../../../components/CardDetail'),
 
 const Home: NextPage<Props> = ({ nameParam, data, loading, error }) => {
     const classes = useStyles()
+    const favorite = useFavorite()
     const [successRate, setSuccessRate] = useState<boolean>(false)
     const [loader, setLoader] = useState<boolean>(false)
     const [modalOpen, setModalOpen] = useState<boolean>(false)
+    const [openNicknameField, setOpenNicknameField] = useState<boolean>(false)
+    const [nickname, setNickname] = useState<string>('')
+    const [errorValidation, setErrorValidation] = useState<boolean>(false)
+    const addFavorite = () => {
+        let isFoundSameNickname = false
+        if (favorite?.state?.list && favorite?.state?.list?.length > 0) {
+            isFoundSameNickname = favorite?.state?.list?.findIndex((item: FavoriteProps) => item?.nickname?.toLowerCase() === nickname.toLowerCase()) > -1
+        }
+        if (!isFoundSameNickname) {
+            favorite?.addFavorite({
+                "id": data?.pokemon?.id,
+                "name": data?.pokemon?.name,
+                "nickname": nickname,
+                "sprites": {
+                    "front_default": data?.pokemon?.sprites?.front_default
+                }
+            })
+            setModalOpen(false)
+        } else {
+            setErrorValidation(true)
+        }
+    }
     const catchPokemon = () => {
         setModalOpen(true)
         setLoader(true)
@@ -95,18 +123,42 @@ const Home: NextPage<Props> = ({ nameParam, data, loading, error }) => {
                         </React.Fragment>
                         :
                         successRate ?
-                            <React.Fragment>
-                                <h3>Congratulations!</h3>
-                                <p>You caught the pokemon. Do you want to proceed?</p>
-                                <div className="d-flex">
-                                    <Button onClick={() => setModalOpen(false)} size="small" variant="outlined" className={`${classes.button} ${classes.buttonOutline}`}>
-                                        No
-                                    </Button>
-                                    <Button size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`}>
-                                        Yes
-                                    </Button>
-                                </div>
-                            </React.Fragment>
+                            openNicknameField ?
+                                <TextField
+                                    label="Type a nickname here"
+                                    id="standard-start-adornment"
+                                    size="small"
+                                    helperText={errorValidation ? 'Nickname already exists' : ''}
+                                    onChange={(e) => {
+                                        setNickname(e?.target?.value)
+                                        setErrorValidation(false)
+                                    }}
+                                    InputProps={{
+                                        endAdornment:
+                                            <InputAdornment position="start">
+                                                <IconButton
+                                                    aria-label="send"
+                                                    edge="end"
+                                                    onClick={() => addFavorite()}
+                                                >
+                                                    <SendIcon fontSize='small' />
+                                                </IconButton>
+                                            </InputAdornment>
+                                    }}
+                                />
+                                :
+                                <React.Fragment>
+                                    <h3>Congratulations!</h3>
+                                    <p>You caught the pokemon. Do you want to proceed?</p>
+                                    <div className="d-flex">
+                                        <Button onClick={() => setModalOpen(false)} size="small" variant="outlined" className={`${classes.button} ${classes.buttonOutline}`}>
+                                            No
+                                        </Button>
+                                        <Button size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`} onClick={() => setOpenNicknameField(true)}>
+                                            Yes
+                                        </Button>
+                                    </div>
+                                </React.Fragment>
                             :
                             <React.Fragment>
                                 <h3>Unfortunately!</h3>

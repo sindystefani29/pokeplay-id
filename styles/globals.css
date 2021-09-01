@@ -74,6 +74,18 @@ td {
   min-height: 20%;
 }
 
+.MuiFormLabel-root.Mui-focused{
+  color: var(--secondaryColor) !important;
+}
+
+.MuiInput-underline:after{
+  border-color: var(--secondaryColor) !important;
+}
+
+.MuiFormHelperText-root{
+  color: red !important;
+}
+
 .rock {
   background-color: rgb(148, 81, 81);
 }

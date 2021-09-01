@@ -32,16 +32,6 @@ const Home: NextPage = () => {
                         </div>
                     }
                 </div>
-                {/* <button onClick={() => {
-                    favorite?.addFavorite({
-                        "id": 4,
-                        "name": "charmander",
-                        "nickname": "poppy",
-                        "sprites": {
-                            "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
-                        }
-                    })
-                }}>Add</button> */}
             </Layout>
         </Container>
     )
