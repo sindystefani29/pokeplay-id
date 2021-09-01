@@ -52,7 +52,10 @@ const CardComponent: React.FC<CardProps> = ({ index, data, fadeEffect }) => {
         <React.Fragment>
             <Card className={`${classes.root} ${fadeEffect ? styles?.fadeEffect : ''}`}>
                 <CardContent className={`d-flex direction-column align-center ${index % 4 === 1 ? 'grass' : index % 3 === 1 ? 'fire' : index % 5 === 1 ? 'water' : index % 6 === 2 ? 'bug' : index % 2 === 0 ? 'poison' : 'electric'}`}>
-                    <Img src={data?.dreamworld ?? ''} alt={data?.name ?? ''} className={classes?.imgCardSize} />
+                    <Img src={data?.dreamworld ?? ''} alt={data?.name ?? ''} className={classes?.imgCardSize} style={{
+                        width: '100%',
+                        minHeight: '96px'
+                    }} />
                     <h3>{data?.name}</h3>
                     <Button onClick={() => setToggleDrawerOpened(true)} size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`}>
                         Preview
@@ -69,7 +72,7 @@ const CardComponent: React.FC<CardProps> = ({ index, data, fadeEffect }) => {
                     <Button onClick={() => setToggleDrawerOpened(false)} size="small" variant="outlined" className={`${classes.button} ${classes.buttonOutline}`}>
                         Batal
                     </Button>
-                    <Link href={`/detail/${data?.id}`}>
+                    <Link href={`/detail/${data?.name}`}>
                         <Button size="small" variant="contained" className={`${classes.button} ${classes.buttonContained}`} onClick={() => setToggleDrawerOpened(false)}>
                             Lihat Selengkapnya
                         </Button>

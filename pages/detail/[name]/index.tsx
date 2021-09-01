@@ -9,6 +9,8 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react'
+import { LOAD_POKEMON_DETAIL } from "../../../graphQL/Queries";
+import { client } from "../../../graphQL/ApolloClient";
 
 const useStyles = makeStyles({
     buttonContained: {
@@ -31,11 +33,21 @@ const useStyles = makeStyles({
         marginTop: '1em',
         marginBottom: '1em',
         textTransform: 'capitalize'
+    },
+    headerDetail: {
+        marginBottom: '1em'
+    },
+    imgDetail: {
+        borderRadius: '50%',
+        border: '1px solid #eeee'
     }
 });
 
 interface Props {
-    idParam: number
+    nameParam: number,
+    data: any,
+    loading: boolean,
+    error: any
 }
 
 const Layout = dynamic(() => import('../../../components/LayoutMobile'),
@@ -45,7 +57,7 @@ const Card = dynamic(() => import('../../../components/CardDetail'),
     { loading: () => <Skeleton variant="rect" style={{ width: '100%' }} height={200} /> })
 
 
-const Home: NextPage<Props> = ({ idParam }) => {
+const Home: NextPage<Props> = ({ nameParam, data, loading, error }) => {
     const classes = useStyles()
     const [successRate, setSuccessRate] = useState<boolean>(false)
     const [loader, setLoader] = useState<boolean>(false)
@@ -62,13 +74,16 @@ const Home: NextPage<Props> = ({ idParam }) => {
     return (
         <Container>
             <Head>
-                <title>Detail Page</title>
+                <title>Detail Page - {data?.pokemon?.name}</title>
                 <meta name="description" content="Pokeplay react app" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Layout titleDetailPage='Ivory'>
-                <Img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png" alt="trial" />
-                <Card />
+            <Layout titleDetailPage={data?.pokemon?.name}>
+                <div className={`d-flex align-center justify-between ${classes?.headerDetail}`}>
+                    <h4>{data?.pokemon?.name}</h4>
+                    <Img src={data?.pokemon?.sprites?.front_default} alt={data?.pokemon?.name} className={classes?.imgDetail} />
+                </div>
+                <Card data={data} />
                 <Button variant="contained" className={`${classes.button} ${classes.buttonContained}`} onClick={() => catchPokemon()}>Catch the Pokemon</Button>
             </Layout>
             <Dialog aria-labelledby="simple-dialog-title" open={modalOpen}>
@@ -109,9 +124,17 @@ const Home: NextPage<Props> = ({ idParam }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     if (params) {
+        const { error, loading, data } = await client.query({
+            query: LOAD_POKEMON_DETAIL,
+            variables: {
+                name: params.name
+            }
+        })
+        //console.log('data', params.name, data)
         return {
             props: {
-                idParam: Number(params.id)
+                nameParam: params.name,
+                data: data
             }
         }
     } else {

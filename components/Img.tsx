@@ -54,10 +54,7 @@ const Img: React.FC<Props> = ({
             ref={imgRef}
             data-src={src ? src : '/no-image.webp'}
             src="/Transparent.webp"
-            style={{
-                width: '100%',
-                minHeight: '96px'
-            }}
+            style={style}
             alt={alt}
             className={`lozad ${className ? className : ''}`}
         />
