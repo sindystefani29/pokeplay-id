@@ -125,7 +125,7 @@ const Home: NextPage<Props> = ({ nameParam, data, loading, error }) => {
                         successRate ?
                             openNicknameField ?
                                 <TextField
-                                    label="Type a nickname here"
+                                    label="Nickname here"
                                     id="standard-start-adornment"
                                     helperText={errorValidation ? 'Nickname already exists' : ''}
                                     onChange={(e) => {

@@ -87,7 +87,7 @@ td {
 }
 
 .MuiTextField-root{
-  width: 100%;
+  min-width: 224px !important;
 }
 
 .rock {
