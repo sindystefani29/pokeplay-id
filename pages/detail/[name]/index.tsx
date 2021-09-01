@@ -127,7 +127,6 @@ const Home: NextPage<Props> = ({ nameParam, data, loading, error }) => {
                                 <TextField
                                     label="Type a nickname here"
                                     id="standard-start-adornment"
-                                    size="small"
                                     helperText={errorValidation ? 'Nickname already exists' : ''}
                                     onChange={(e) => {
                                         setNickname(e?.target?.value)
