@@ -10,7 +10,6 @@ const CardDetail: React.FC<CardProps> = ({
     data
 }) => {
     const item = data?.pokemon
-    console.log(item)
     return (
         <Card>
             <CardContent>

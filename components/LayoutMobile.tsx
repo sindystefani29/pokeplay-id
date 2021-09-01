@@ -14,6 +14,7 @@ import { useFavorite } from '../context/FavoritesContext'
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Badge from '@material-ui/core/Badge';
+import { useEffect } from 'react';
 
 interface LayoutProps {
     children: any
@@ -78,6 +79,10 @@ const Layout: React.FC<LayoutProps> = ({
             }
         }, 500);
     }
+    useEffect(() => {
+        //console.log('hydrate state here')
+        favorite?.hydrateFavorite()
+    }, [])
     return (
         <React.Fragment>
             <HideOnScroll>
