@@ -19,7 +19,7 @@ export interface FavoriteProps {
 }
 
 interface FavoriteProviderProps {
-    children: any
+    children: React.ReactNode
 }
 
 interface StateProps {
